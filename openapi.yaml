@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: STD24209
+  description: This is a specification of STD24209
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local server
+paths:
+  /ping:
+    get:
+      summary: Ping endpoint
+      operationId: ping
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "pong"
+  
+  /cars:
+    post:
+      summary: Create cars
+      operationId: create_cars
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Car'
+      responses:
+        '201':
+          description: Cars created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  count:
+                    type: integer
+    
+    get:
+      summary: Get all cars
+      operationId: get_all_cars
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+  
